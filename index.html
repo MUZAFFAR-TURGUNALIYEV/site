@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
+    <style>
+        hr {
+            border: 1px solid #575454;
+            width: 100%;
+        }
+
+        .yumaloq {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: blue;
+            border: 1px solid #000;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+
+        .wrapper {
+            width: 100%;
+            display: flex;
+            height: 100vh;
+
+        }
+
+        .leftblock {
+            
+            width: 80%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .rightblock {
+            width: 20%;
+            border: 1px solid #000;
+            height: 100%;
+            background-color: cadetblue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .scrolblock{
+             flex-direction: column;
+            align-items: center;
+            overflow: auto;
+            width: 200px;
+            height: 400px;
+            border: 1px solid #000;
+
+        }
+
+        .leftblock button {
+            margin-top: 20px;
+
+        }
+        .rightblock button{
+            margin: 0px auto;
+        }
+        #button1 {
+            width: 195px;
+            height: 135px;
+            background: url(images/fon1.png);
+            background-size: 100% 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #button2 {
+            width: 195px;
+            height: 135px;
+            background: url(images/fon2.png);
+            background-size: 100% 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #button3 {
+            width: 195px;
+            height: 135px;
+            background: url(images/fon3.png);
+            background-size: 100% 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #button4 {
+            width: 195px;
+            height: 135px;
+            background: url(images/fon4.png);
+            background-size: 100% 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #button5 {
+            width: 195px;
+            height: 135px;
+            background: url(images/fon5.png);
+            background-size: 100% 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #button6 {
+            width: 195px;
+            height: 135px;
+            background: url(images/fon6.png);
+            background-size: 100% 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #button7 {
+            width: 195px;
+            height: 135px;
+            background: url(images/fon7.png);
+            background-size: 100% 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #button9 {
+            width: 195px;
+            height: 135px;
+            background: url(images/fon9.png);
+            background-size: 100% 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #button8 {
+            width: 195px;
+            height: 135px;
+            background: url(images/fon8.png);
+            background-size: 100% 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #button10 {
+            width: 195px;
+            height: 135px;
+            background: url(images/fon10.png);
+            background-size: 100% 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+
+        .draggable {
+            font-size: 40px;
+            position: absolute;
+            cursor: move;
+            text-align: center;
+            border: none;
+            text-decoration: underline;
+            padding: 10px;
+            background-color: transparent;
+        }
+
+        #resizeHandle {
+            width: 10px;
+            height: 10px;
+            background-color: blue;
+            position: relative;
+            right: 0;
+            bottom: 0;
+            cursor: se-resize;
+            z-index: 2;
+        }
+
+        .container {
+            position: absolute;
+        }
+
+        #textpanel {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+            height: 650px;
+            position: absolute;
+            right: 310px;
+            top: 0;
+            border: 1px solid #000;
+            display: none;
+        }
+
+        .changesizeblock button {
+            width: 30px;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        @font-face {
+            font-family: Caturiver;
+            src: url(fonts/caturiver.ttf);
+        }
+
+        @font-face {
+            font-family: Evergreen;
+            src: url(fonts/Evergreen.ttf);
+        }
+
+        @font-face {
+            font-family: Gastermos;
+            src: url(fonts/Gastermos.ttf);
+        }
+
+        @font-face {
+            font-family: marcus;
+            src: url(fonts/marcus.ttf);
+        }
+
+        @font-face {
+            font-family: round;
+            src: url(fonts/round.ttf);
+        }
+
+        @font-face {
+            font-family: Noplato;
+            src: url(fonts/Noplato.ttf);
+        }
+        #kok{
+            width: 20px;
+            height: 20px;
+            background-color: blue;
+        }
+        #yashil{
+            width: 20px;
+            height: 20px;
+            background-color: green;
+        }
+        #pushti{
+            width: 20px;
+            height: 20px;
+            background-color: pink;
+        }
+        #qizil{
+            width: 20px;
+            height: 20px;
+            background-color: red;
+        }
+        #sariq{
+            width: 20px;
+            height: 20px;
+            background-color: yellow;
+        }
+        #qora{
+            width: 20px;
+            height: 20px;
+            background-color: black;
+        }
+        .yozuvRangi{
+            display: grid;
+            width: 60px;
+            height: 60px;
+            
+            grid-template-columns: 20px 20px 20px; 
+            grid-template-rows: 20px 20px 20px;  
+        }
+        .yozuvRangi button{
+            border: 1px solid #fff;
+        }
+        #siyohrang{
+            background-color: blueviolet;
+            width: 20px;
+            height: 20px;
+        }
+        #olovrang{
+            background-color: orange;
+            width: 20px;
+            height: 20px;
+        }
+        #kulrang{
+            background-color: gray;
+            width: 20px;
+            height: 20px;
+          
+            
+        } 
+        #qalinlik{
+            display: grid;
+            width: 100%;
+            height: 90px;
+            border: 1px solid #000;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 1px;
+            
+
+        }    
+        #qalinlik button{
+            border: 1px solid red;
+            background-color: aqua;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            justify-content: center;
+            display: flex;
+        }
+        #letterSpace button{
+               width: 30px;
+               height: 30px;
+               background-color: aqua;
+               border: 1px solid red;
+        }
+   </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="leftblock">
+            <div id="capture" style="position: relative; width: 1000px; height: 650px; border: 1px solid #000;">
+                <div class="container" id="container">
+                    
+                </div>
+            </div>
+            
+            <button id="saveBtn">Tasvirni saqlash</button>
+        </div>
+
+
+        <div class="rightblock">
+            <p>Fonni tanlang</p>
+            <div class="scrolblock">
+            <button id="button1"></button>
+            <button id="button2"></button>
+            <button id="button3"></button>
+            <button id="button4"></button>
+            <button id="button5"></button>
+            <button id="button6"></button>
+            <button id="button7"></button>
+            <button id="button8"></button>
+            <button id="button9"></button>
+            <button id="button10"></button>
+            </div>
+            
+            <br>
+            <button id="select">Kompyuterdan tanlash</button>
+            <img id="display" src="" alt="Tanlangan rasm" style="display:none; width: 300px; height: auto;"/>
+            <button id="newtext">Yangi yozuv</button>
+        </div>
+
+    </div>
+
+    <div id="textpanel">
+        <p>Harf xajmi</p>
+        <div class="changesizeblock">
+            <button id="plus">+</button>
+            <button id="minus">-</button>
+        </div>
+        <p>Harf turi</p>
+        <select name="fonts" id="selectFonts">
+            <option value="Noplato">Noplato</option>
+            <option value="Caturiver">Caturiver</option>
+            <option value="Evergreen">Evergreen</option>
+            <option value="Gastermos">Gastermos</option>
+            <option value="marcus">Marcus</option>
+            <option value="round">Round</option>
+        </select>
+
+        <hr>
+
+        <button id="noLine">Chiziq
+        </button>
+
+        <hr>
+        <p>Yozuv rangi</p>
+        <div class="yozuvRangi">
+        <button id="kok"></button>
+        <button id="yashil"></button>
+        <button id="pushti"></button>
+        <button id="qizil"></button>
+        <button id="qora"></button>
+        <button id="sariq"></button>
+        <button id="kulrang"></button>
+        <button id="olovrang"></button>
+        <button id="siyohrang"></button>
+    </div>
+        <hr>
+        <button id="qiyalik">/</button>
+        <hr>
+        <p>yozuv qalinligi</p>
+        <div id="qalinlik">
+        <button id="i1">100</button>
+        <button id="i2">200</button>
+        <button id="i3">300</button>
+        <button id="i4">400</button>
+        <button id="i5">500</button>
+        <button id="i6">600</button>
+        <button id="i7">700</button>
+        <button id="i8">800</button>
+        <button id="i9">900</button>
+    </div>
+    <hr>
+    <p>Yozuv ochiqligi</p>
+    <div id="letterSpace">
+        <button id="plyus">+</button>
+        <button id="minuss">-</button>
+    </div>
+
+        
+
+    </div>
+
+
+    <script>
+        let minus = document.getElementById('minuss');
+        let plyus = document.getElementById('plyus');
+        let kok = document.getElementById('kok');
+        let yashil= document.getElementById('yashil');
+        let pushti = document.getElementById('pushti');
+        let qizil = document.getElementById('qizil');
+        let qora = document.getElementById('qora');
+        let sariq= document.getElementById('sariq');
+        let kulrang= document.getElementById('kulrang');
+        let olovrang= document.getElementById('olovrang');
+        let siyohrang= document.getElementById('siyohrang');
+        let textpanel= document.getElementById('textpanel');
+        let qiyalik= document.getElementById('qiyalik');
+        let i1 = document.getElementById('i1');
+        let i2 = document.getElementById('i2');
+        let i3 = document.getElementById('i3');
+        let i4 = document.getElementById('i4');
+        let i5 = document.getElementById('i5');
+        let i6 = document.getElementById('i6');
+        let i7 = document.getElementById('i7');
+        let i8 = document.getElementById('i8');
+        let i9 = document.getElementById('i9');
+
+
+        
+        let chiziqcheck = true;
+        let suriluvchiYozuv;
+        let button1 = document.getElementById('button1');
+        let button2 = document.getElementById('button2');
+        let button3 = document.getElementById('button3');
+        let sertifikat = document.getElementById('capture');
+        let plustextsize = document.getElementById('plus');
+        let minustextsize = document.getElementById('minus');
+        let newtextbtn = document.getElementById('newtext');
+        let activeInputId;
+
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            var divElement = document.getElementById("capture");
+
+            domtoimage.toPng(divElement)
+                .then(function (dataUrl) {
+                    var link = document.createElement('a');
+                    link.href = dataUrl;
+                    link.download = 'capture.png';
+                    link.click();
+                })
+                .catch(function (error) {
+                    console.error('Ekran surati olishda xato:', error);
+                });
+        });
+
+        button1.addEventListener('click', () => {
+            sertifikat.style.background = 'url("images/fon1.png")';
+            sertifikat.style.backgroundSize = '100% 100%';
+        })
+        button2.addEventListener('click', () => {
+            sertifikat.style.background = 'url("images/fon2.png")';
+            sertifikat.style.backgroundSize = '100% 100%';
+        })
+        button3.addEventListener('click', () => {
+            sertifikat.style.background = 'url("images/fon3.png")';
+            sertifikat.style.backgroundSize = '100% 100%';
+        })
+        button4.addEventListener('click', () => {
+            sertifikat.style.background = 'url("images/fon4.png")';
+            sertifikat.style.backgroundSize = '100% 100%';
+        })
+        button5.addEventListener('click', () => {
+            sertifikat.style.background = 'url("images/fon5.png")';
+            sertifikat.style.backgroundSize = '100% 100%';
+        })
+        button6.addEventListener('click', () => {
+            sertifikat.style.background = 'url("images/fon6.png")';
+            sertifikat.style.backgroundSize = '100% 100%';
+        })
+        button7.addEventListener('click', () => {
+            sertifikat.style.background = 'url("images/fon7.png")';
+            sertifikat.style.backgroundSize = '100% 100%';
+        })
+        button8.addEventListener('click', () => {
+            sertifikat.style.background = 'url("images/fon8.png")';
+            sertifikat.style.backgroundSize = '100% 100%';
+        })
+        button9.addEventListener('click', () => {
+            sertifikat.style.background = 'url("images/fon9.png")';
+            sertifikat.style.backgroundSize = '100% 100%';
+        })
+        button10.addEventListener('click', () => {
+            sertifikat.style.background = 'url("images/fon10.png")';
+            sertifikat.style.backgroundSize = '100% 100%';
+            display.style.display = 'none';
+        })
+
+
+        plustextsize.addEventListener('click', () => {
+            let draggableInput = document.getElementById(`${activeInputId}`);
+            let currentFontSize = parseFloat(window.getComputedStyle(draggableInput).fontSize);
+            let newFontSize = currentFontSize + 1; // Увеличиваем на 2 пикселя (или любое другое значение)
+            draggableInput.style.fontSize = `${newFontSize}px`;
+        });
+        minustextsize.addEventListener('click', () => {
+            let draggableInput = document.getElementById(`${activeInputId}`);
+            let currentFontSize = parseFloat(window.getComputedStyle(draggableInput).fontSize);
+            let newFontSize = currentFontSize - 1; // Увеличиваем на 2 пикселя (или любое другое значение)
+            draggableInput.style.fontSize = `${newFontSize}px`;
+        });
+        let inputCounter = 0;
+        let yozuvlar = {};
+        newtextbtn.addEventListener('click', () => {
+            let container = document.getElementById('container');
+            let textInput = document.createElement('input');
+            textInput.placeholder = 'TEXT';
+            textInput.classList.add('draggable');
+            textpanel.style.display = 'flex';
+
+
+            let id = 'dynamicInput' + inputCounter;
+            textInput.id = id;
+            activeInputId = id;
+            textInput.style.fontFamily = 'Noplato';
+            textInput.contentEditable = true;
+            yozuvlar[inputCounter] = textInput;
+            container.appendChild(yozuvlar[inputCounter]);
+            inputCounter++;
+            console.log(yozuvlar);
+            addDragAndTypeFunctionality(textInput);
+        })
+
+        function addDragAndTypeFunctionality(inputElement) {
+            let isDragging = false; // Bu o'zgaruvchi yozuvni yuritish holatini tekshirish uchun ishlatiladi
+            let startX, startY; // Yuritishni boshlash uchun yurgizilgan nuqtaning x va y koordinatalari
+
+            // Mousedown hodisasi
+            inputElement.addEventListener('mousedown', function (e) {
+                if (e.target !== inputElement) return; // ota qizi elementlar uchun yuritishni to'xtatish
+                e.preventDefault(); // murojaat uchun standart ravishda davom etilmasin
+
+                isDragging = true; // yuritishni boshlash
+                startX = e.clientX - inputElement.offsetLeft; // yuritishni boshlash nuqtaning x koordinatasi
+                startY = e.clientY - inputElement.offsetTop; // yuritishni boshlash nuqtaning y koordinatasi
+            });
+            inputElement.addEventListener('click', () => {
+                inputElement.focus();
+                activeInputId = inputElement.id;
+            })
+            // Mousemove hodisasi
+            document.addEventListener('mousemove', function (e) {
+                if (!isDragging) return; // agar yuritish boshlanmagan bo'lsa, chiqish
+
+                const newX = e.clientX - startX; // yangi x koordinatasi
+                const newY = e.clientY - startY; // yangi y koordinatasi
+
+                inputElement.style.left = newX + 'px'; // yuritishning x koordinatasini yangilash
+                inputElement.style.top = newY + 'px'; // yuritishning y koordinatasini yangilash
+            });
+
+            // Mouseup hodisasi
+            document.addEventListener('mouseup', function () {
+                isDragging = false; // yuritishni to'xtatish
+            });
+        }
+
+        //Bu joydan boshlab yozuvga tanlangan yozuv turi beriladi
+        let selectElement = document.getElementById('selectFonts');
+        selectElement.addEventListener('change', function () {
+            let selectedInput = document.getElementById(`${activeInputId}`)
+            const selectedOption = this.options[this.selectedIndex];
+            const selectedValue = selectedOption.value;
+            selectedInput.style.fontFamily = selectedValue;
+        });
+
+        document.getElementById('noLine').addEventListener('click', (e) => {
+            if (chiziqcheck) {
+                e.target.style.background = 'yellow'
+                document.getElementById(`${activeInputId}`).style.textDecoration = 'none'
+                chiziqcheck = false;
+            } else {
+                e.target.style.background = 'green'
+                e.target.style.color = 'white'
+                document.getElementById(`${activeInputId}`).style.textDecoration = 'underline'
+                chiziqcheck = true;
+            }
+        });
+    kok.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.color = 'blue';
+    })
+    yashil.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.color = 'green';
+    })
+    pushti.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.color = 'pink';
+    })
+    sariq.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.color = 'yellow';
+    })
+    qizil.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.color = 'red';
+    })
+    qora.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.color = 'black';
+    })
+    kulrang.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.color = 'gray';
+    })
+    olovrang.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.color = 'orange';
+    })
+    siyohrang.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.color = 'blueviolet';
+    })
+    qiyalik.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.fontStyle = 'italic';
+    })
+    i1.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.fontWeight = '100';
+    })
+    i2.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.fontWeight = '200';
+    })
+    i3.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.fontWeight = '300';
+    })
+    i4.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.fontWeight = '400';
+    })
+    i5.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.fontWeight = '500';
+    })
+    i6.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.fontWeight = '600';
+    })
+    i7.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.fontWeight = '700';
+    })
+    i8.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.fontWeight = '800';
+    })
+    i9.addEventListener('click', () =>{
+        document.getElementById(`${activeInputId}`).style.fontWeight = '900';
+    })
+    let count = 0
+    plyus.addEventListener('click', () =>{
+        count++
+        document.getElementById(`${activeInputId}`).style.letterSpacing =(` ${count}px`)
+    })
+    minus.addEventListener('click', () =>{
+        count--
+        document.getElementById(`${activeInputId}`).style.letterSpacing =(` ${count}px`)
+    })
+    document.getElementById("select").onclick = function (e) {
+            let input = document.createElement('input');
+            input.type = 'file';
+
+            input.onchange = e => {
+                let files = e.target.files;
+                let reader = new FileReader();
+
+                reader.onload = function () {
+                    let img = document.getElementById('display');
+                    sertifikat.style.background = `url(${reader.result})`;
+                    sertifikat.style.backgroundSize='100% 100%' // Faylning mazmunini img src atributiga o'rnatish
+                }
+
+                reader.readAsDataURL(files[0]); // Faylni o'qish va Data URL ga o'girish
+            }
+
+            input.click();
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fayl tanlash va ko'rsatish</title>
+</head>
+<body>
+    <button id="select">Fayl tanlash</button>
+    <img id="display" src="" alt="Tanlangan rasm" style="display:none; width: 300px; height: auto;"/>
+
+    <script>
+        document.getElementById("select").onclick = function (e) {
+            let input = document.createElement('input');
+            input.type = 'file';
+
+            input.onchange = e => {
+                let files = e.target.files;
+                let reader = new FileReader();
+
+                reader.onload = function () {
+                    let img = document.getElementById('display');
+                    img.src = reader.result; // Faylning mazmunini img src atributiga o'rnatish
+                    img.style.display = 'block'; // Rasmani ko'rsatish uchun img elementini ko'rinadigan qilish
+                }
+
+                reader.readAsDataURL(files[0]); // Faylni o'qish va Data URL ga o'girish
+            }
+
+            input.click();
+        }
+    </script>
+</body>
+</html>
